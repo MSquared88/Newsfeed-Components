@@ -174,11 +174,11 @@ function createArticle(title, date, firstParagraph, secondParagraph, thirdParagr
 
 // Step 4: Map over the data, creating a component for each oject and add each component to the DOM as children of the 'articles' div.
 
-const articles = document.querySelector('.articles')
+const articles = document.querySelector('.articles');
 
 data.forEach((data) => {
     articles.appendChild(createArticle(data.title, data.date, data.firstParagraph, data.secondParagraph, data.thirdParagraph))
-  })
+  });
   
   
   // Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article
