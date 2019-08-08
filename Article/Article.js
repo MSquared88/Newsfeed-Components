@@ -85,30 +85,100 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
-  }
+  },
+  {
+    title: 'Bob Ross in 2019',
+    date: 'Jan 1st, 2019',
+    firstParagraph: `Just go out and talk to a tree. Make friends with it. Work on one thing at a time. Don't get carried away - we have plenty of time. Just let go - and fall like a little waterfall. A tree cannot be straight if it has a crooked trunk. I really recommend you use odorless thinner or your spouse is gonna run you right out into the yard and you'll be working by yourself.
+    `,
+
+    secondParagraph: `Maybe he has a little friend that lives right over here. You can work and carry-on and put lots of little happy things in here. Let's put some highlights on these little trees. The sun wouldn't forget them. Just make a decision and let it go. With practice comes confidence.
+    `,
+          
+    thirdParagraph: `I'll go over the colors one more time that we use: Titanium white, Thalo green, Prussian blue, Van Dyke brown, Alizarin crimson, Sap green, Cad yellow, and Permanent red. You can get away with a lot. Don't fiddle with it all day. This is your creation - and it's just as unique and special as you are.
+    `
+  
+    },
+    {
+    title: 'Samuel L Jackson in Unbreakable',
+    date: 'Jan 1st, 2019',
+    firstParagraph: `Your bones don't break, mine do. That's clear. Your cells react to bacteria and viruses differently than mine. You don't get sick, I do. That's also clear. But for some reason, you and I react the exact same way to water. We swallow it too fast, we choke. We get some in our lungs, we drown. However unreal it may seem, we are connected, you and I. We're on the same curve, just on opposite ends.
+    `,
+
+    secondParagraph: `Now that we know who you are, I know who I am. I'm not a mistake! It all makes sense! In a comic, you know how you can tell who the arch-villain's going to be? He's the exact opposite of the hero. And most times they're friends, like you and me! I should've known way back when... You know why, David? Because of the kids. They called me Mr Glass.
+    `,
+          
+    thirdParagraph: `Your bones don't break, mine do. That's clear. Your cells react to bacteria and viruses differently than mine. You don't get sick, I do. That's also clear. But for some reason, you and I react the exact same way to water. We swallow it too fast, we choke. We get some in our lungs, we drown. However unreal it may seem, we are connected, you and I. We're on the same curve, just on opposite ends.
+    `
+    }
 ];
 
 /* Step 1: Create a function that creates a component. You will want your component to look like the template below: 
+
+<div class="article">
+<h2>{title of the article}</h2>
+<p class="date">{date of the article}</p>
+
+{three separate paragraph elements}
+
+<span class='expandButton'></span>
+</div>
+
+Hint: You will need to use createElement more than once here!
+
+Your function should take either an object as it's one argument, or 5 separate arguments mapping to each peice of the data object above.*/
+
+function createArticle(title, date, firstParagraph, secondParagraph, thirdParagraph){
+  //declare all elements
   
-  <div class="article">
-    <h2>{title of the article}</h2>
-    <p class="date">{date of the article}</p>
+  const article = document.createElement('div');
+  const articleTitle = document.createElement('h2');
+  const articleDate = document.createElement('p');
+  const paragraph1 = document.createElement('p');
+  const paragraph2 = document.createElement('p');
+  const paragraph3 = document.createElement('p');
+  const btn = document.createElement('span');
+  
+  //nest elements in correct order
+  article.appendChild(articleTitle);
+  article.appendChild(articleDate);
+  article.appendChild(paragraph1);
+  article.appendChild(paragraph2);
+  article.appendChild(paragraph3);
+  article.appendChild(btn);
+  
+  //set class names
+  article.classList.add('article');
+  articleDate.classList.add('date');
+  btn.classList.add('expandButton');
+  
+  //set element content
+  articleTitle.textContent = title;
+  articleDate.textContent = date;
+  paragraph1.textContent = firstParagraph;
+  paragraph2.textContent = secondParagraph;
+  paragraph3.textContent = thirdParagraph;
+  btn.textContent = 'Expand'
+  
+  
+  // Step 2: Add an event listener to the expandButton span. This event listener should toggle the class 'article-open' on the 'article' div.
+  
+  btn.addEventListener('click', (e) => {
+    article.classList.toggle('article-open')
+  })
+  
+  // Step 3: return the entire component.
+  
+  return article
+}
 
-    {three separate paragraph elements}
+// Step 4: Map over the data, creating a component for each oject and add each component to the DOM as children of the 'articles' div.
 
-    <span class='expandButton'></span>
-  </div>
+const articles = document.querySelector('.articles');
 
-  Hint: You will need to use createElement more than once here!
-
-  Your function should take either an object as it's one argument, or 5 separate arguments mapping to each peice of the data object above.
-
-  Step 2: Add an event listener to the expandButton span. This event listener should toggle the class 'article-open' on the 'article' div.
-
-  Step 3: return the entire component.
-
-  Step 4: Map over the data, creating a component for each oject and add each component to the DOM as children of the 'articles' div.
-
-  Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new artible
-
-*/
+data.forEach((data) => {
+    articles.appendChild(createArticle(data.title, data.date, data.firstParagraph, data.secondParagraph, data.thirdParagraph))
+  });
+  
+  
+  // Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article
